@@ -1,16 +1,18 @@
 ﻿#include<iostream>
 using namespace std;
-//#define ASCII
+
+#define ASCII
+void Print(char str[], const int n);
 int string_length(char str[], const int n);
 void to_lower(char str[], const int n);
-void Print(char str[], const int n);
+void to_upper(char str[], const int n);
 
 
 void main()
 {
 	
 	const int n = 500;
-	char str[n];
+	char* str = new char[n];
 	cin.get(str,n);
 	cout << string_length(str, n) << endl;
 #ifdef ASCII
@@ -18,10 +20,8 @@ void main()
 #endif // ASCII
 	to_lower(str, n);
 	Print(str, n);
-	char* arr = new char[50];
-	cin >> arr;
-	cout << arr;
-	
+	to_upper(str, n);
+	Print(str, n);
 		
 
 }
@@ -39,9 +39,19 @@ void to_lower(char str[], const int n)
 {
 	for (int i = 0; i < string_length(str, n); i++)
 	{
-		if (int(str[i])>=65 && int(str[i])<=90 ) str[i] = int(str[i]) + 32;
-		else if (int(str[i])>=97 && int(str[i])<=122 ) str[i] = int(str[i]) - 32;
-
-		
+		if(256+str[i] == 240) str[i]=241; // Ё-ё
+		if (str[i]>=65 && str[i]<=90 ) str[i] = str[i] + 32;//Латинские
+		else if (256+str[i] >= 128 && 256+str[i] <= 143) str[i] = 256+str[i] + 32; //Русские
+		else if (256+str[i]>=144 && 256+str[i]<=159 ) str[i] = 256+str[i] + 80; //Русские
+	}
+}
+void to_upper(char str[], const int n)
+{
+	for (int i = 0; i < string_length(str, n); i++)
+	{
+		if(256+str[i] == 241) str[i]=240; // Ё-ё
+		if (str[i]>=97 && str[i]<=122 ) str[i] = str[i] - 32;//Латинские
+		else if (256+str[i] >= 160 && 256+str[i] <= 175) str[i] = 256+str[i] - 32; //Русские
+		else if (256+str[i]>=224 && 256+str[i]<=239 ) str[i] = 256+str[i] - 80; //Русские
 	}
 }
