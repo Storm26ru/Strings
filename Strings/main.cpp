@@ -8,6 +8,7 @@ void to_lower(char str[], const int n);
 void to_upper(char str[], const int n);
 void shrink(char*& str, const int n);
 int is_int_number(char str[], const int n);
+int to_int_number(char str[], const int n);
 
 
 
@@ -27,8 +28,8 @@ void main()
 	Print(str, n);
 	shrink(str, n);
 	Print(str, n);
-	cout << is_int_number(str, n);
-		
+	if (is_int_number(str, n)) cout << "Строка является целым числом : " << to_int_number(str, n) << endl;
+	else cout << "Строка не является целым число" << endl;
 
 }
 int string_length(char str[], const int n)
@@ -81,4 +82,28 @@ int is_int_number(char str[], const int n)
 		if (!(str[i] >= 48 && str[i] <= 57)) return 0;
 	}
 	return 1;
+}
+int to_int_number(char str[], const int n)
+{
+	int num = 0;
+	for (int i = 0,j=0; i < string_length(str, n) - 1; i++)
+	{
+		switch (str[i])
+		{
+		case 48: j = 0; break;
+		case 49: j = 1; break;
+		case 50: j = 2; break;
+		case 51: j = 3; break;
+		case 52: j = 4; break;
+		case 53: j = 5; break;
+		case 54: j = 6; break;
+		case 55: j = 7; break;
+		case 56: j = 8; break;
+		case 57: j = 9; break;
+		}
+		if (j == 0) num *= 10;
+		else num = (num + double(j) / 10) * 10;
+	} 
+
+	return num;
 }
