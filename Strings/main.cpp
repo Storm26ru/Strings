@@ -9,6 +9,8 @@ void to_upper(char str[], const int n);
 void shrink(char*& str, const int n);
 int is_int_number(char str[], const int n);
 int to_int_number(char str[], const int n);
+int is_palindrome(char str[], const int n);
+void shrink1(char str[], const int n);
 
 
 
@@ -26,11 +28,14 @@ void main()
 	Print(str, n);
 	to_upper(str, n);
 	Print(str, n);
-	shrink(str, n);
+	//shrink(str, n);
+	shrink1(str, n);
 	Print(str, n);
 	if (is_int_number(str, n)) cout << "Строка является целым числом : " << to_int_number(str, n) << endl;
 	else cout << "Строка не является целым число" << endl;
-
+	if (is_palindrome(str, n)) cout << "Строка является палиндромом 1" << endl;
+	else cout << "Строка не является палиндромом 0" << endl;
+	delete[] str;
 }
 int string_length(char str[], const int n)
 {
@@ -62,7 +67,6 @@ void to_upper(char str[], const int n)
 		else if (256+str[i]>=224 && 256+str[i]<=239 ) str[i] = 256+str[i] - 80; //Русские
 	}
 }
-
 void shrink(char*& str, const int n)
 {
 	char* bufer = new char[n];
@@ -106,4 +110,22 @@ int to_int_number(char str[], const int n)
 	} 
 
 	return num;
+}
+int is_palindrome(char str[], const int n)
+{
+	for (int i = 0; i < (string_length(str, n)-1)/2; i++)
+	{
+		if (str[i] != str[(string_length(str, n)-2) - i]) return 0;
+	}
+	return 1;
+}
+void shrink1(char str[], const int n)
+{
+	for (int i = 0; i < string_length(str,n) - 2; i++)
+	{
+		while (str[i] == str[i + 1] && str[i] == 32)
+		{
+			for (int j = i + 1; j < string_length(str, n); j++) str[j] = str[j + 1];
+		}
+	}
 }
