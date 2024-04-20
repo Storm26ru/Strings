@@ -11,7 +11,6 @@ void shrink(char*& str, const int n);
 int is_int_number(char str[], const int n);
 int to_int_number(char str[], const int n);
 int is_palindrome(char str[], const int n);
-void shrink1(char str[], const int n);
 
 
 
@@ -33,8 +32,7 @@ void main()
 	to_upper(str, n);
 	Print(str, n);
 	RU; cout << "Удаляем лишние пробелы:  " << endl;
-	//shrink(str, n);
-	shrink1(str, n);
+	shrink(str, n);
 	Print(str, n);
 	RU; cout << "Введите строку: " << endl;
 	cin.getline(str, n);
@@ -126,14 +124,4 @@ int is_palindrome(char str[], const int n)
 		if (str[i] != str[(string_length(str, n)-2) - i]) return 0;
 	}
 	return 1;
-}
-void shrink1(char str[], const int n)
-{
-	for (int i = 0; i < string_length(str,n) - 2; i++)
-	{
-		while (str[i] == str[i + 1] && str[i] == 32)
-		{
-			for (int j = i + 1; j < string_length(str, n); j++) str[j] = str[j + 1];
-		}
-	}
 }
