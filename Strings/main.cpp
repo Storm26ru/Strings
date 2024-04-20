@@ -1,6 +1,7 @@
 ﻿#include<iostream>
 using namespace std;
-
+#define RU setlocale(LC_ALL, "")
+#define EN setlocale(LC_ALL, "C")
 //#define ASCII
 void Print(char str[], const int n);
 int string_length(char str[], const int n);
@@ -19,22 +20,28 @@ void main()
 	
 	const int n = 500;
 	char* str = new char[n];
-	cin.get(str,n);
-	cout << string_length(str, n) << endl;
+	RU; cout << "Введите строку: " << endl;
+	cin.getline(str, n);
+	cout << "Длина строки: " << string_length(str, n) << endl;
 #ifdef ASCII
 	for (int i = 0; i < 257; i++) cout << i << "  " << char(i) << endl;
 #endif // ASCII
+	cout << "Переводим символы в нижний регистр: " << endl;
 	to_lower(str, n);
 	Print(str, n);
+	RU; cout << "Переводим символы в верхний регистр:  " << endl;
 	to_upper(str, n);
 	Print(str, n);
+	RU; cout << "Удаляем лишние пробелы:  " << endl;
 	//shrink(str, n);
 	shrink1(str, n);
 	Print(str, n);
-	if (is_int_number(str, n)) cout << "Строка является целым числом : " << to_int_number(str, n) << endl;
+	RU; cout << "Введите строку: " << endl;
+	cin.getline(str, n);
+	RU; if (is_int_number(str, n)) cout << "Строка является целым числом : " << to_int_number(str, n) << endl;
 	else cout << "Строка не является целым число" << endl;
-	if (is_palindrome(str, n)) cout << "Строка является палиндромом 1" << endl;
-	else cout << "Строка не является палиндромом 0" << endl;
+	if (is_palindrome(str, n)) cout << "Строка является палиндромом " << endl;
+	else cout << "Строка не является палиндромом " << endl;
 	delete[] str;
 }
 int string_length(char str[], const int n)
@@ -44,6 +51,7 @@ int string_length(char str[], const int n)
 }
 void Print(char str[], const int n)
 {
+	EN;
 	for (int i = 0; i < string_length(str, n); i++) cout << str[i];
 	cout << endl;
 }
