@@ -19,7 +19,7 @@ void main()
 {
 	
 	const int n = 500;
-	char* str = new char[n];
+	char str[n];
 	RU; cout << "Введите строку: " << endl;
 	cin.getline(str, n);
 	cout << "Длина строки: " << string_length(str, n) << endl;
@@ -42,7 +42,6 @@ void main()
 	else cout << "Строка не является целым число" << endl;
 	if (is_palindrome(str, n)) cout << "Строка является палиндромом " << endl;
 	else cout << "Строка не является палиндромом " << endl;
-	delete[] str;
 }
 int string_length(char str[], const int n)
 {
