@@ -7,11 +7,10 @@ void Print(char str[], const int n);
 int string_length(char str[], const int n);
 void to_lower(char str[], const int n);
 void to_upper(char str[], const int n);
-void shrink(char*& str, const int n);
+void shrink(char str[], const int n);
 int is_int_number(char str[], const int n);
 int to_int_number(char str[], const int n);
 int is_palindrome(char str[], const int n);
-void shrink1(char str[], const int n);
 
 
 
@@ -33,8 +32,7 @@ void main()
 	to_upper(str, n);
 	Print(str, n);
 	RU; cout << "Удаляем лишние пробелы:  " << endl;
-	//shrink(str, n);
-	shrink1(str, n);
+	shrink(str, n);
 	Print(str, n);
 	RU; cout << "Введите строку: " << endl;
 	cin.getline(str, n);
@@ -74,17 +72,15 @@ void to_upper(char str[], const int n)
 		else if (256+str[i]>=224 && 256+str[i]<=239 ) str[i] = 256+str[i] - 80; //Русские
 	}
 }
-void shrink(char*& str, const int n)
+void shrink(char str[], const int n)
 {
-	char* bufer = new char[n];
-	bufer[0] = str[0];
-	for (int i = 1,j=0; i < string_length(str, n); i++)
+	for (int i = 0; i < string_length(str,n) - 2; i++)
 	{
-		if (bufer[j] == str[i] && bufer[j] == 32) continue;
-		bufer[++j] = str[i];
+		while (str[i] == str[i + 1] && str[i] == 32)
+		{
+			for (int j = i + 1; j < string_length(str, n); j++) str[j] = str[j + 1];
+		}
 	}
-		delete[] str;
-		str = bufer;
 }
 int is_int_number(char str[], const int n)
 {
@@ -125,14 +121,4 @@ int is_palindrome(char str[], const int n)
 		if (str[i] != str[(string_length(str, n)-2) - i]) return 0;
 	}
 	return 1;
-}
-void shrink1(char str[], const int n)
-{
-	for (int i = 0; i < string_length(str,n) - 2; i++)
-	{
-		while (str[i] == str[i + 1] && str[i] == 32)
-		{
-			for (int j = i + 1; j < string_length(str, n); j++) str[j] = str[j + 1];
-		}
-	}
 }
